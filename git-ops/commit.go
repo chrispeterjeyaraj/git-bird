@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/chrispeterjeyaraj/git-bird/utils"
+	"github.com/janeczku/go-spinner"
 )
 
 // Commit performs a Git commit with the provided message.
@@ -18,11 +19,12 @@ func Commit() {
 		fmt.Println("Error running 'git status':", err)
 		return
 	}
-	fmt.Println("=========================")
-	fmt.Println("		Changed files log: 		")
-	fmt.Println("=========================")
+	fmt.Println("====================================")
+	fmt.Println("           File Changes						 ")
+	fmt.Println("====================================")
 	fmt.Println(statusOutput)
-	fmt.Println("=========================")
+	fmt.Println("====================================")
+	fmt.Println("")
 
 	// Ask the user for input to choose what to commit
 	fmt.Print("Do you want to commit the entire root folder? (yes/no): ")
@@ -32,13 +34,13 @@ func Commit() {
 
 	if input == "yes" {
 		// Commit the entire root folder
-		addOutput, err := utils.RunGitCommand("add", ".")
+		_, err = utils.RunGitCommand("add", ".")
 		if err != nil {
 			fmt.Println("Error running 'git add .':", err)
 			return
 		}
-		fmt.Println("Git Add:")
-		fmt.Println(addOutput)
+		fmt.Println("Added files for commit")
+		fmt.Println("")
 	} else if input == "no" {
 		// Ask for the specific folder to commit
 		fmt.Print("Enter the path to the specific folder to commit: ")
@@ -46,13 +48,13 @@ func Commit() {
 		folderPath := scanner.Text()
 
 		// Commit the specific folder
-		addOutput, err := utils.RunGitCommand("add", folderPath)
+		_, err = utils.RunGitCommand("add", folderPath)
 		if err != nil {
 			fmt.Println("Error running 'git add "+folderPath+"':", err)
 			return
 		}
-		fmt.Println("Git Add:")
-		fmt.Println(addOutput)
+		fmt.Println("Added files for commit")
+		fmt.Println("")
 	} else {
 		fmt.Println("Invalid input. Please enter 'yes' or 'no'.")
 		return
@@ -69,7 +71,9 @@ func Commit() {
 		fmt.Println("Error running 'git commit':", err)
 		return
 	}
-	fmt.Println("Committed the files. Pushing changes to repository. Please wait ........")
+	// fmt.Println("Committed the files. Pushing changes to repository. Please wait ........")
+	s := spinner.StartNew("Committed the files. Pushing changes to repository. Please wait ........")
+	fmt.Println("")
 
 	// Push the changes
 	pushOutput, err := utils.RunGitCommand("push")
@@ -77,6 +81,7 @@ func Commit() {
 		fmt.Println("Error running 'git push':", err)
 		return
 	}
+	s.Stop()
 	fmt.Println("Changes pushed to repository:")
 	fmt.Println(pushOutput)
 }
