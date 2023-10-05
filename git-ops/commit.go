@@ -6,12 +6,14 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/chrispeterjeyaraj/git-bird/utils"
 )
 
 // Commit performs a Git commit with the provided message.
-func Commit(message string) {
+func Commit() {
 	// Run "git status -s" and print the status
-	statusOutput, err := utils.gitRunner("status", "-s")
+	statusOutput, err := utils.RunGitCommand("status", "-s")
 	if err != nil {
 		fmt.Println("Error running 'git status':", err)
 		return
@@ -27,7 +29,7 @@ func Commit(message string) {
 
 	if input == "yes" {
 		// Commit the entire root folder
-		addOutput, err := utils.gitRunner("add", ".")
+		addOutput, err := utils.RunGitCommand("add", ".")
 		if err != nil {
 			fmt.Println("Error running 'git add .':", err)
 			return
@@ -41,7 +43,7 @@ func Commit(message string) {
 		folderPath := scanner.Text()
 
 		// Commit the specific folder
-		addOutput, err := utils.gitRunner("add", folderPath)
+		addOutput, err := utils.RunGitCommand("add", folderPath)
 		if err != nil {
 			fmt.Println("Error running 'git add ./"+folderPath+"':", err)
 			return
@@ -59,7 +61,7 @@ func Commit(message string) {
 	commitMessage := scanner.Text()
 
 	// Commit with the provided message
-	commitOutput, err := utils.gitRunner("commit", "-m", commitMessage)
+	commitOutput, err := utils.RunGitCommand("commit", "-m", commitMessage)
 	if err != nil {
 		fmt.Println("Error running 'git commit':", err)
 		return
@@ -68,7 +70,7 @@ func Commit(message string) {
 	fmt.Println(commitOutput)
 
 	// Push the changes
-	pushOutput, err := utils.gitRunner("push")
+	pushOutput, err := utils.RunGitCommand("push")
 	if err != nil {
 		fmt.Println("Error running 'git push':", err)
 		return
