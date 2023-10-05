@@ -79,7 +79,7 @@ func Commit() {
 
 	// Wait for a moment before stopping the spinner
 	time.Sleep(2 * time.Second)
-	fmt.Println("\nPushing changes to repository. Please wait ........")
+	fmt.Println("\nPushing changes to repository...")
 	fmt.Println("")
 
 	// Push the changes
@@ -94,7 +94,7 @@ func Commit() {
 
 func spinner(done chan bool) {
 	// Define a set of spinner frames or characters
-	frames := []string{"-", "\\", "|", "/"}
+	frames := []string{"⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷"}
 
 	i := 0
 	for {
