@@ -8,6 +8,9 @@ import (
 )
 
 func main() {
+	fmt.Println("====================================")
+	fmt.Println("         Git Bird v0.1						 ")
+	fmt.Println("====================================")
 	// Define command-line flags
 	commitFlag := flag.Bool("commit", false, "Commit changes")
 	pullFlag := flag.Bool("pull", false, "Pull changes from remote repository")

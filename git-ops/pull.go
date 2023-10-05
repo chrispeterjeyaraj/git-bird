@@ -15,6 +15,6 @@ func Pull() {
 		fmt.Println("Error running 'git pull':", err)
 		return
 	}
-	fmt.Println("Git Pull:")
+	fmt.Println("Pulling changes from your current branch:")
 	fmt.Println(pullOutput)
 }
