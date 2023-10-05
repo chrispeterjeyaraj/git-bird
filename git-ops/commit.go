@@ -32,7 +32,7 @@ func Commit() {
 	scanner.Scan()
 	input := strings.ToLower(scanner.Text())
 
-	if input == "yes" {
+	if input == "yes" || input == "" {
 		// Commit the entire root folder
 		_, err = utils.RunGitCommand("add", ".")
 		if err != nil {
@@ -77,11 +77,6 @@ func Commit() {
 		return
 	}
 
-	// Wait for a moment before stopping the spinner
-	time.Sleep(2 * time.Second)
-	fmt.Println("Pushing changes to repository. Please wait ........")
-	fmt.Println("")
-
 	// Push the changes
 	pushOutput, err := utils.RunGitCommand("push")
 	if err != nil {
@@ -90,6 +85,8 @@ func Commit() {
 	}
 	fmt.Println("Changes pushed to repository:")
 	fmt.Println(pushOutput)
+	// Wait for a moment before stopping the spinner
+	time.Sleep(2 * time.Second)
 }
 
 func spinner(done chan bool) {
@@ -103,7 +100,7 @@ func spinner(done chan bool) {
 			return
 		default:
 			// Print the current spinner frame or character
-			fmt.Printf("\rCommitting... %s", frames[i])
+			fmt.Printf("\rPushing changes to repository. Please wait ........... \n%s", frames[i])
 			i = (i + 1) % len(frames)
 			time.Sleep(100 * time.Millisecond)
 		}
