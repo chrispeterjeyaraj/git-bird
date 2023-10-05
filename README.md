@@ -1,6 +1,8 @@
 # git-bird
 Git Bird is a command-line tool that simplifies common Git operations. It provides a convenient way to perform tasks like committing changes, pulling updates from a remote repository, and more.
 
+[![Go build](https://github.com/chrispeterjeyaraj/git-bird/actions/workflows/go.yml/badge.svg)](https://github.com/chrispeterjeyaraj/git-bird/actions/workflows/go.yml)
+
 ## Prerequisites :clipboard:
 
 Before installing Git Bird, You will also need to have GoLang installed. To check if you have Go installed, open your terminal window and run the following command:
