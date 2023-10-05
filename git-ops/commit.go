@@ -38,7 +38,7 @@ func Commit(operation string) {
 			fmt.Println("Error running 'git add .':", err)
 			return
 		}
-		fmt.Println("Added files for commit")
+		fmt.Println("✓ Added files for commit")
 		fmt.Println("")
 	} else if input == "no" {
 		// Ask for the specific folder to commit
@@ -52,7 +52,7 @@ func Commit(operation string) {
 			fmt.Println("Error running 'git add "+folderPath+"':", err)
 			return
 		}
-		fmt.Println("Added files for commit")
+		fmt.Println("✓ Added files for commit")
 		fmt.Println("")
 	} else {
 		fmt.Println("Invalid input. Please enter 'yes' or 'no'.")
@@ -87,6 +87,6 @@ func Commit(operation string) {
 		}
 		// Stop the spinner
 		done <- true
-		fmt.Printf("Changes Pushed %s", pushOutput)
+		fmt.Printf("✓ Changes Pushed %s", pushOutput)
 	}
 }

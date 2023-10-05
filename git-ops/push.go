@@ -20,6 +20,6 @@ func Push() {
 	}
 	// Stop the spinner
 	done <- true
-	fmt.Println("Pushed changes to repository")
+	fmt.Println("✓ Pushed changes to repository")
 	fmt.Println(pullOutput)
 }

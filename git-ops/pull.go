@@ -20,6 +20,6 @@ func Pull() {
 	}
 	// Stop the spinner
 	done <- true
-	fmt.Println("Pulling changes from your current branch:")
+	fmt.Println("✓ Pulled changes from repository")
 	fmt.Println(pullOutput)
 }
