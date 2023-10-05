@@ -67,7 +67,6 @@ func Commit() {
 
 	// Start the spinner in a goroutine
 	done := make(chan bool)
-	defer close(done)
 	go spinner(done)
 
 	// Commit with the provided message
@@ -76,6 +75,10 @@ func Commit() {
 		fmt.Println("Error running 'git commit':", err)
 		return
 	}
+	// Stop the spinner
+	done <- true
+	// Print a newline after the spinner stops
+	fmt.Println("")
 
 	// Wait for a moment before stopping the spinner
 	time.Sleep(2 * time.Second)
