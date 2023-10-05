@@ -7,7 +7,7 @@ import (
 	"github.com/chrispeterjeyaraj/git-bird/utils"
 )
 
-// Pull performs a Git pull operation.
+// Push performs a Git Push operation.
 func Push() {
 	// Start the spinner in a goroutine
 	done := make(chan bool)

@@ -13,13 +13,22 @@ func main() {
 	commitandpushFlag := flag.Bool("commitandpush", false, "Commit and push changes")
 	pullFlag := flag.Bool("pull", false, "Pull changes from remote repository")
 	pushFlag := flag.Bool("push", false, "Push changes to remote repository")
+	statFlag := flag.Bool("stat", false, "Show the repository, branch and current status")
 	helpFlag := flag.Bool("help", false, "Show help documentation")
+	usageFlag := flag.Bool("usage", false, "Show help documentation")
 
 	// Parse command-line flags
 	flag.Parse()
 
+	if flag.NFlag() == 0 {
+		fmt.Println("====================================")
+		fmt.Println("           Git Bird v0.1            ")
+		fmt.Println("====================================")
+		fmt.Println("Please use --usage or --help to know more about the features for Git Bird")
+	}
+
 	// Show help documentation if requested
-	if flag.NFlag() == 0 || *helpFlag {
+	if *usageFlag || *helpFlag {
 		helpdocs()
 		return
 	}
@@ -30,7 +39,7 @@ func main() {
 	}
 
 	if *commitandpushFlag {
-		gitops.Commit("commit&push")
+		gitops.Commit("commitandpush")
 	}
 
 	if *pullFlag {
@@ -38,6 +47,9 @@ func main() {
 	}
 	if *pushFlag {
 		gitops.Push()
+	}
+	if *statFlag {
+		gitops.Stat()
 	}
 }
 
