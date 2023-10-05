@@ -98,6 +98,9 @@ func spinner(done chan bool) {
 	for {
 		select {
 		case <-done:
+			fmt.Printf("\033[2K")
+			fmt.Println()
+			fmt.Printf("\033[1A")
 			return
 		default:
 			// Print the current spinner frame or character
