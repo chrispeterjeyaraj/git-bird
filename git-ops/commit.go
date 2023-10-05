@@ -75,11 +75,6 @@ func Commit() {
 		fmt.Println("Error running 'git commit':", err)
 		return
 	}
-	// Stop the spinner
-	done <- true
-	// Print a newline after the spinner stops
-	fmt.Println("")
-
 	// Wait for a moment before stopping the spinner
 	time.Sleep(2 * time.Second)
 	fmt.Println("\nPushing changes to repository...")
@@ -93,6 +88,8 @@ func Commit() {
 	}
 	fmt.Println("Changes pushed to repository:")
 	fmt.Println(pushOutput)
+	// Stop the spinner
+	done <- true
 }
 
 func spinner(done chan bool) {
