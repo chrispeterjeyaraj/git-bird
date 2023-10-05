@@ -85,15 +85,14 @@ func Commit() {
 		fmt.Println("Error running 'git push':", err)
 		return
 	}
-	fmt.Println("Changes pushed to repository:")
-	fmt.Println(pushOutput)
 	// Stop the spinner
 	done <- true
+	fmt.Printf("Changes Pushed %s", pushOutput)
 }
 
 func spinner(done chan bool) {
 	// Define a set of spinner frames or characters
-	frames := []string{"⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷"}
+	frames := []string{"⠈⠁", "⠈⠑", "⠈⠱", "⠈⡱", "⢀⡱", "⢄⡱", "⢄⡱", "⢆⡱", "⢎⡱", "⢎⡰", "⢎⡠", "⢎⡀", "⢎⠁", "⠎⠁", "⠊⠁"}
 
 	i := 0
 	for {
