@@ -103,7 +103,7 @@ func spinner(done chan bool) {
 			return
 		default:
 			// Print the current spinner frame or character
-			fmt.Printf(frames[i])
+			fmt.Printf("\r%s", frames[i])
 			i = (i + 1) % len(frames)
 			time.Sleep(100 * time.Millisecond)
 		}
