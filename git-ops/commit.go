@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/chrispeterjeyaraj/git-bird/utils"
-	"github.com/janeczku/go-spinner"
 )
 
 // Commit performs a Git commit with the provided message.
@@ -20,7 +20,7 @@ func Commit() {
 		return
 	}
 	fmt.Println("====================================")
-	fmt.Println("           File Changes						 ")
+	fmt.Println("           File Changes              ")
 	fmt.Println("====================================")
 	fmt.Println(statusOutput)
 	fmt.Println("====================================")
@@ -65,14 +65,21 @@ func Commit() {
 	scanner.Scan()
 	commitMessage := scanner.Text()
 
+	// Start the spinner in a goroutine
+	done := make(chan bool)
+	defer close(done)
+	go spinner(done)
+
 	// Commit with the provided message
 	_, err = utils.RunGitCommand("commit", "-m", commitMessage)
 	if err != nil {
 		fmt.Println("Error running 'git commit':", err)
 		return
 	}
-	// fmt.Println("Committed the files. Pushing changes to repository. Please wait ........")
-	s := spinner.StartNew("Committed the files. Pushing changes to repository. Please wait ........")
+
+	// Wait for a moment before stopping the spinner
+	time.Sleep(2 * time.Second)
+	fmt.Println("Pushing changes to repository. Please wait ........")
 	fmt.Println("")
 
 	// Push the changes
@@ -81,7 +88,24 @@ func Commit() {
 		fmt.Println("Error running 'git push':", err)
 		return
 	}
-	s.Stop()
 	fmt.Println("Changes pushed to repository:")
 	fmt.Println(pushOutput)
+}
+
+func spinner(done chan bool) {
+	// Define a set of spinner frames or characters
+	frames := []string{"-", "\\", "|", "/"}
+
+	i := 0
+	for {
+		select {
+		case <-done:
+			return
+		default:
+			// Print the current spinner frame or character
+			fmt.Printf("\rCommitting... %s", frames[i])
+			i = (i + 1) % len(frames)
+			time.Sleep(100 * time.Millisecond)
+		}
+	}
 }
