@@ -6,13 +6,12 @@ import (
 	"fmt"
 	"os"
 	"strings"
-	"time"
 
 	"github.com/chrispeterjeyaraj/git-bird/utils"
 )
 
 // Commit performs a Git commit with the provided message.
-func Commit() {
+func Commit(operation string) {
 	// Run "git status -s" and print the status
 	statusOutput, err := utils.RunGitCommand("status", "-s")
 	if err != nil {
@@ -72,41 +71,22 @@ func Commit() {
 		return
 	}
 
-	// Start the spinner in a goroutine
-	done := make(chan bool)
-	go spinner(done)
+	if operation == "commitandpush" {
+		// Start the spinner in a goroutine
+		done := make(chan bool)
+		go utils.Spinner(done)
 
-	fmt.Println("\nPushing changes to repository...")
-	fmt.Println("")
+		fmt.Println("\nPushing changes to repository...")
+		fmt.Println("")
 
-	// Push the changes
-	pushOutput, err := utils.RunGitCommand("push")
-	if err != nil {
-		fmt.Println("Error running 'git push':", err)
-		return
-	}
-	// Stop the spinner
-	done <- true
-	fmt.Printf("Changes Pushed %s", pushOutput)
-}
-
-func spinner(done chan bool) {
-	// Define a set of spinner frames or characters
-	frames := []string{"⠈⠁", "⠈⠑", "⠈⠱", "⠈⡱", "⢀⡱", "⢄⡱", "⢄⡱", "⢆⡱", "⢎⡱", "⢎⡰", "⢎⡠", "⢎⡀", "⢎⠁", "⠎⠁", "⠊⠁"}
-
-	i := 0
-	for {
-		select {
-		case <-done:
-			fmt.Printf("\033[2K")
-			fmt.Println()
-			fmt.Printf("\033[1A")
+		// Push the changes
+		pushOutput, err := utils.RunGitCommand("push")
+		if err != nil {
+			fmt.Println("Error running 'git push':", err)
 			return
-		default:
-			// Print the current spinner frame or character
-			fmt.Printf("\r%s", frames[i])
-			i = (i + 1) % len(frames)
-			time.Sleep(100 * time.Millisecond)
 		}
+		// Stop the spinner
+		done <- true
+		fmt.Printf("Changes Pushed %s", pushOutput)
 	}
 }

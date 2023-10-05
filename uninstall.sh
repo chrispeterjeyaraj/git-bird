@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-
-# Remove the aicommit alias
-sed -i '/alias gitbird="git-bird"/d' ~/.bashrc
-
+echo "==============================================="
+echo "      Un-Installaling Git Bird v0.1       "
+echo "==============================================="
+echo ""
 # Remove the go package
 sudo rm /usr/local/bin/gitbird
 
-echo "git-bird has been uninstalled."
+echo "✓ Un-Installation Completed."
