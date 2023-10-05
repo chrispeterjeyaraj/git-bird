@@ -77,6 +77,11 @@ func Commit() {
 		return
 	}
 
+	// Wait for a moment before stopping the spinner
+	time.Sleep(2 * time.Second)
+	fmt.Println("\nPushing changes to repository. Please wait ........")
+	fmt.Println("")
+
 	// Push the changes
 	pushOutput, err := utils.RunGitCommand("push")
 	if err != nil {
@@ -85,8 +90,6 @@ func Commit() {
 	}
 	fmt.Println("Changes pushed to repository:")
 	fmt.Println(pushOutput)
-	// Wait for a moment before stopping the spinner
-	time.Sleep(2 * time.Second)
 }
 
 func spinner(done chan bool) {
@@ -100,7 +103,7 @@ func spinner(done chan bool) {
 			return
 		default:
 			// Print the current spinner frame or character
-			fmt.Printf("\rPushing changes to repository. Please wait ........... \n%s", frames[i])
+			fmt.Printf(frames[i])
 			i = (i + 1) % len(frames)
 			time.Sleep(100 * time.Millisecond)
 		}
