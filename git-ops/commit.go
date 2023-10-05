@@ -65,18 +65,17 @@ func Commit() {
 	scanner.Scan()
 	commitMessage := scanner.Text()
 
-	// Start the spinner in a goroutine
-	done := make(chan bool)
-	go spinner(done)
-
 	// Commit with the provided message
 	_, err = utils.RunGitCommand("commit", "-m", commitMessage)
 	if err != nil {
 		fmt.Println("Error running 'git commit':", err)
 		return
 	}
-	// Wait for a moment before stopping the spinner
-	time.Sleep(2 * time.Second)
+
+	// Start the spinner in a goroutine
+	done := make(chan bool)
+	go spinner(done)
+
 	fmt.Println("\nPushing changes to repository...")
 	fmt.Println("")
 
