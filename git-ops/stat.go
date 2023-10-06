@@ -1,4 +1,3 @@
-// gitops/pull.go
 package gitops
 
 import (
@@ -28,7 +27,7 @@ func Stat() {
 	done1 := make(chan bool)
 	go utils.Spinner(done1)
 	// Run "git status -s" and print the status
-	statusOutput, err := utils.RunGitCommand("status", "--short", "|", "column", "-t")
+	statusOutput, err := utils.RunGitCommand("status", "--short")
 	if err != nil {
 		fmt.Println("Error running 'git status':", err)
 		return

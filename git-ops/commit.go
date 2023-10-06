@@ -1,4 +1,3 @@
-// gitops/commit.go
 package gitops
 
 import (
@@ -13,7 +12,7 @@ import (
 // Commit performs a Git commit with the provided message.
 func Commit(operation string) {
 	// Run "git status -s" and print the status
-	statusOutput, err := utils.RunGitCommand("status", "--short", "|", "column", "-t")
+	statusOutput, err := utils.RunGitCommand("status", "--short")
 	if err != nil {
 		fmt.Println("Error running 'git status':", err)
 		return

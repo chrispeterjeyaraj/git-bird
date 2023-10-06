@@ -1,4 +1,3 @@
-// gitops/pull.go
 package gitops
 
 import (
