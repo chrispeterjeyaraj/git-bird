@@ -50,6 +50,7 @@ func ContinueOrReject() {
 	input := strings.ToLower(scanner.Text())
 
 	if input == "yes" {
+		fmt.Println("")
 		fmt.Println("Allright! Pushing changes to repository. Please Wait...")
 		fmt.Println("")
 		PushAction()

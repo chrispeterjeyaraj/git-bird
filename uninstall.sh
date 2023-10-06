@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 echo "==============================================="
-echo "      Un-Installaling Git Bird v0.1       "
+echo "      Un-Installaling Git Bird v0.1.1       "
 echo "==============================================="
 echo ""
 # Remove the go package

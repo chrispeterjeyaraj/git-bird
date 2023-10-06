@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Install the required Go packages
 echo "==============================================="
-echo "      Installing Git Bird v0.1       "
+echo "      Installing Git Bird v0.1.1       "
 echo "==============================================="
 echo ""
 go get -u github.com/go-git/go-git

@@ -37,6 +37,7 @@ func Commit(operation string) {
 			fmt.Println("Error running 'git add .':", err)
 			return
 		}
+		fmt.Println("")
 		fmt.Println("✓ Added files for commit")
 		fmt.Println("")
 	} else if input == "no" {
@@ -51,6 +52,7 @@ func Commit(operation string) {
 			fmt.Println("Error running 'git add "+folderPath+"':", err)
 			return
 		}
+		fmt.Println("")
 		fmt.Println("✓ Added files for commit")
 		fmt.Println("")
 	} else {
@@ -74,7 +76,7 @@ func Commit(operation string) {
 		// Start the spinner in a goroutine
 		done := make(chan bool)
 		go utils.Spinner(done)
-
+		fmt.Println("")
 		fmt.Println("\nPushing changes to repository...")
 		fmt.Println("")
 

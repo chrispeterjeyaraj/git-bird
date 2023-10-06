@@ -23,6 +23,8 @@ func Stat() {
 	done <- true
 	fmt.Println("Repository and Branch details:")
 	fmt.Println(pullOutput)
+	fmt.Println("")
+	fmt.Println("")
 
 	done1 := make(chan bool)
 	go utils.Spinner(done1)
