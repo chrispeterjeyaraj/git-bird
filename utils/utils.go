@@ -17,6 +17,15 @@ func RunGitCommand(args ...string) (string, error) {
 	return string(output), err
 }
 
+func RunGitBash(args ...string) (string, error) {
+	// Create a new command to run bash with the specified arguments
+	cmd := exec.Command("bash", args...)
+	// Execute the Git bash command and capture its combined output
+	output, err := cmd.CombinedOutput()
+	// Convert the output to a string and return it along with any errors
+	return string(output), err
+}
+
 func Spinner(done chan bool) {
 	// Define a set of spinner frames or characters
 	// You can use any spiner characters you want from the SPINNER.md file

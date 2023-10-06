@@ -21,7 +21,7 @@ func Push() {
 		done1 := make(chan bool)
 		go utils.Spinner(done1)
 		// Run "git status -s" and print the status
-		statusOutput, err := utils.RunGitCommand("git diff origin/$(git name-rev --name-only HEAD)..HEAD --name-status")
+		statusOutput, err := utils.RunGitBash("-c", "git diff origin/$(git name-rev --name-only HEAD)..HEAD --name-status")
 		if err != nil {
 			fmt.Println("Error running 'git status':", err)
 			return

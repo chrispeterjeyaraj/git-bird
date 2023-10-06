@@ -27,7 +27,7 @@ func Stat() {
 	done1 := make(chan bool)
 	go utils.Spinner(done1)
 	// Run "git status -s" and print the status
-	statusOutput, err := utils.RunGitCommand("status", "--short")
+	statusOutput, err := utils.RunGitBash("-c", "git status --short | column -t")
 	if err != nil {
 		fmt.Println("Error running 'git status':", err)
 		return
