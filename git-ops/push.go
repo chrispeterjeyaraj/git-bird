@@ -12,7 +12,7 @@ import (
 // Push performs a Git Push operation.
 func Push() {
 	// Ask the user for input to choose what to commit
-	fmt.Print("Would you like to see the changes before pushing? (yes/no): ")
+	fmt.Print("Would you like to see the changes before pushing? (no/yes): ")
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
 	input := strings.ToLower(scanner.Text())
@@ -21,7 +21,7 @@ func Push() {
 		done1 := make(chan bool)
 		go utils.Spinner(done1)
 		// Run "git status -s" and print the status
-		statusOutput, err := utils.RunGitCommand("status", "--short", "|", "column", "-t")
+		statusOutput, err := utils.RunGitCommand("git diff origin/$(git name-rev --name-only HEAD)..HEAD --name-status")
 		if err != nil {
 			fmt.Println("Error running 'git status':", err)
 			return
