@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "embed"
 	"flag"
 	"fmt"
 	"log"
@@ -9,9 +10,12 @@ import (
 	gitops "github.com/chrispeterjeyaraj/git-bird/git-ops"
 )
 
+//go:embed config/config.yaml
+var configData []byte
+
 func main() {
-	// Extract the version details from config.yaml file
-	config, err := config.LoadConfig("./config/config.yaml")
+	// Extract the version details from embedded config.yaml data
+	config, err := config.LoadConfigFromBytes(configData)
 	if err != nil {
 		log.Fatal("Error loading configuration:", err)
 	}
