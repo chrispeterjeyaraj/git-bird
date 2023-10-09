@@ -23,7 +23,7 @@ func main() {
 	flag.Parse()
 
 	// Display the welcome message and usage information if no flags are provided
-	if flag.NFlag() == 0 || *usageFlag || *helpFlag {
+	if flag.NFlag() == 0 {
 		fmt.Println("====================================")
 		fmt.Println("           Git Bird v0.1.1          ")
 		fmt.Println("====================================")
@@ -49,6 +49,10 @@ func main() {
 
 	if *statFlag {
 		gitops.Stat()
+	}
+
+	if *usageFlag || *helpFlag {
+		helpdocs()
 	}
 }
 

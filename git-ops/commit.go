@@ -25,7 +25,7 @@ func Commit(operation string) {
 	fmt.Println("")
 
 	// Ask the user for input to choose what to commit
-	fmt.Print("Do you want to commit the entire root folder? (yes/no): ")
+	fmt.Print("Do you want to commit all the changes? (yes/no): ")
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
 	input := strings.ToLower(scanner.Text())
