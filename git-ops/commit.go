@@ -41,19 +41,22 @@ func Commit(operation string) {
 		fmt.Println("✓ Added files for commit")
 		fmt.Println("")
 	} else if input == "no" {
-		// Ask for the specific folder to commit
-		fmt.Print("Enter the path to the specific folder to commit: ")
+		// Ask for the specific files or folders to commit
+		fmt.Print("Enter the paths to the files or folders to commit (comma-separated): ")
 		scanner.Scan()
-		folderPath := scanner.Text()
+		paths := strings.Split(scanner.Text(), ",")
+		for _, path := range paths {
+			// Trim leading and trailing spaces
+			path = strings.TrimSpace(path)
 
-		// Commit the specific folder
-		_, err = utils.RunGitCommand("add", folderPath)
-		if err != nil {
-			fmt.Println("Error running 'git add "+folderPath+"':", err)
-			return
+			// Commit the specific file or folder
+			_, err = utils.RunGitCommand("add", path)
+			if err != nil {
+				fmt.Printf("Error running 'git add %s': %v\n", path, err)
+				return
+			}
+			fmt.Printf("✓ Added %s for commit\n", path)
 		}
-		fmt.Println("")
-		fmt.Println("✓ Added files for commit")
 		fmt.Println("")
 	} else {
 		fmt.Println("Invalid input. Please enter 'yes' or 'no'.")
