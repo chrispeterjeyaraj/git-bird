@@ -25,7 +25,7 @@ func main() {
 	// Display the welcome message and usage information if no flags are provided
 	if flag.NFlag() == 0 {
 		fmt.Println("====================================")
-		fmt.Println("           Git Bird v0.1.1          ")
+		fmt.Println("           Git Bird v0.1.2          ")
 		fmt.Println("====================================")
 		fmt.Println("Please use --usage or --help to know more about the features for Git Bird")
 	}
@@ -58,7 +58,7 @@ func main() {
 
 func helpdocs() {
 	fmt.Println("====================================")
-	fmt.Println("           Git Bird v0.1.1          ")
+	fmt.Println("           Git Bird v0.1.2          ")
 	fmt.Println("====================================")
 	fmt.Println("Usage:")
 	fmt.Println("  -stat: Show the repository, branch and current status")
