@@ -23,6 +23,7 @@ func main() {
 	var (
 		commitFlag        = flag.Bool("commit", false, "Commit changes only")
 		commitandpushFlag = flag.Bool("commitandpush", false, "Commit and push changes")
+		checkoutFlag      = flag.Bool("checkout", false, "Checkout branch from remote repository")
 		pullFlag          = flag.Bool("pull", false, "Pull changes from remote repository")
 		pushFlag          = flag.Bool("push", false, "Push changes to remote repository")
 		statFlag          = flag.Bool("stat", false, "Show the repository, branch, and current status")
@@ -70,6 +71,10 @@ func main() {
 	if *versionFlag {
 		fmt.Printf("GitBird %s \n", config.Version)
 	}
+
+	if *checkoutFlag {
+		gitops.Checkout()
+	}
 }
 
 func helpdocs(version string) {
@@ -80,6 +85,7 @@ func helpdocs(version string) {
 	fmt.Println("  -stat: Show the repository, branch and current status")
 	fmt.Println("  -commit: Commit changes")
 	fmt.Println("  -commitandpush: Commit and push changes to repository")
+	fmt.Println("  -checkout: Checkout branch from remote repository")
 	fmt.Println("  -pull: Pull changes from remote repository")
 	fmt.Println("  -push: push changes from remote repository")
 	fmt.Println("  -help: Show this help documentation")
